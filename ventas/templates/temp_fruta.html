@@ -1,0 +1,34 @@
+{% extends "main.html" %}
+
+{% block title %} Ver fruta: {{model.id}} {% endblock %}
+
+{% block title2 %} Ver fruta: {{model.id}} {% endblock %}
+
+{% block content %}
+
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th scope="row">Nombre</th>
+      <td>{{model.nombre}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Cantidad</th>
+      <td>{{model.cantidad}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Precio de Compra</th>
+      <td>{{model.precio_compra}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Precio de Venta</th>
+      <td>{{model.precio_venta}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Unidad</th>
+      <td>{{model.unidad_medida}}</td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}

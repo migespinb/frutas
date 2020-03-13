@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+
+{% block title %} Ver venta: {{model.id}} {% endblock %}
+
+{% block title2 %} Ver venta: {{model.id}} {% endblock %}
+
+{% block content %}
+
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th scope="row">Fruta</th>
+      <td>{{model.fruta.nombre}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Cantidad</th>
+      <td>{{model.cantidad}} {{model.fruta.unidad_medida}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Precio Total</th>
+      <td>{{model.precio_total}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Precio de Venta</th>
+      <td>{{model.fecha}}</td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block title %} Usuario {% endblock %}
+
+{% block title2 %} Usuario {% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-2">
+		<img src="{{request.user.usuario.imagen.url}}" class="img-thumbnail" >
+	</div>
+	<div class="col-md-6">
+		<form action="" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{form.as_p}}
+			<a href="/" class="btn btn-light">Salir</a>
+			<button class="btn btn-primary" type="submit">Guardar</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

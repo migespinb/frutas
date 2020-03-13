@@ -1,0 +1,56 @@
+{% extends "main.html" %}
+
+{% block title %} Registro de ventas {% endblock %}
+
+{% block title2 %} Registro de ventas {% endblock %}
+
+{% block content %}
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable Example</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio Total</th>
+                        <th>Fecha</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio Total</th>
+                        <th>Fecha</th>
+                        <th>Opciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                	{% for model in models %}
+                    <tr>
+                    	<td>{{model.id}}</td>
+                    	<td>{{model.fruta.nombre}}</td>
+                    	<td>{{model.cantidad}} {{model.fruta.unidad_medida}}</td>
+                        <td>{{model.precio_total}}</td>
+                        <td>{{model.fecha}}</td>
+                    	<td>
+                            <a href="/viewventa/{{model.id}}"><span class="btn btn-success">Ver</span></a>
+                    		<a href="/updateventa/{{model.id}}"><span class="btn btn-info">Editar</span></a>
+	                    	<a href="/deleteventa/{{model.id}}"><span class="btn btn-danger">Eliminar</span></a>
+                    	</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

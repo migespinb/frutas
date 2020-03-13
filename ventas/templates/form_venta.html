@@ -1,0 +1,94 @@
+{% extends "main.html" %}
+
+{% block title %} Venta {% endblock %}
+
+{% block title2 %} Venta {% endblock %}
+
+{% block content %}
+
+
+	<form action="" method="POST">
+		{% csrf_token %}
+
+		{% for non_field_error in formulario.non_field_errors %}
+			<p class="form-text text-muted">{{non_field_error}}</p>
+		{%endfor%}
+
+		{% for atributo in formulario %}
+
+			<div class="col-md-6">
+		        <div class="form-group">
+		        	<label class="small mb-1" for="{{atributo.id_for_label}}">{{atributo.label}}</label>{{atributo}}
+
+		        	{% for error in atributo.errors %}
+		        	<small class="form-text text-muted">
+				      {{error}}
+				    </small>
+		        	{% endfor %}
+
+		        </div>
+		    </div>
+
+	    {% endfor %}
+
+		<div class="form-group mt-4 mb-0">
+			<button type="submit" class="btn btn-primary btn-block">Guardar</button>
+		</div>
+		<input id="valor" type="hidden" name="valor" disabled>
+
+	</form>
+	<script>
+
+        $(document).ready(function() {
+			var cant=$("#cant").val();
+			if (cant==0) {
+				cambiar();
+			}
+			var total=$("#total").val();
+			// console.log(cant);
+			// console.log(total);
+			if (cant && total) {
+				punit=total/cant;
+				console.log(punit);
+				$("#valor").val(punit);
+
+			}
+		});	
+
+
+		function cambiar()
+		{
+			var id=$("#id_fruta").val();
+			console.log(id);
+
+			$.ajax({
+		        url: '/getprecio/',
+		        data: {
+		          'id': id
+		        },
+		        dataType: 'json',
+		        success: function (data) {
+		          if (data.valor_vta) {
+		            // console.log(data.valor_vta);
+		            $("#valor").val(data.valor_vta);
+		            calcular_total();
+		          }
+		        }
+		    });
+		}
+
+		function calcular_total(){
+			var valor=$("#valor").val();
+
+			var cant=$("#cant").val();
+			if(cant && valor){
+				$("#total").val(valor*cant);
+			}
+			else{
+				$("#total").val(0);
+			}
+		}
+
+	</script>
+
+{% endblock %}

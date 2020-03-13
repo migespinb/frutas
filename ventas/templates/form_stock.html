@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+
+{% block title %} Agregar stock {% endblock %}
+
+{% block title2 %} Agregar stock {% endblock %}
+
+{% block content %}
+
+	<form action="" method="POST">
+		{% csrf_token %}
+
+		{% for non_field_error in formulario.non_field_errors %}
+			<p class="form-text text-muted">{{non_field_error}}</p>
+		{%endfor%}
+
+		{% for atributo in formulario %}
+
+			<div class="col-md-6">
+		        <div class="form-group">
+		        	<label class="small mb-1" for="{{atributo.id_for_label}}">{{atributo.label}}</label>{{atributo}}
+
+		        	{% for error in atributo.errors %}
+		        	<small class="form-text text-muted">
+				      {{error}}
+				    </small>
+		        	{% endfor %}
+
+		        </div>
+		    </div>
+
+	    {% endfor %}
+
+		<div class="form-group mt-4 mb-0">
+			<button type="submit" class="btn btn-primary btn-block">Guardar</button>
+		</div>
+
+	</form>
+
+{% endblock %}

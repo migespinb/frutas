@@ -1,0 +1,75 @@
+{% extends "main.html" %}
+
+{% block title %} Stock actual {% endblock %}
+
+{% block title2 %} Stock actual {% endblock %}
+
+
+{% block content %}
+
+{% for mensaje in messages %}
+    <div class="alert alert-danger" role="alert">
+      {{mensaje}}
+    </div>
+{%  endfor %}
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>DataTable Example</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        {% if request.user.is_staff %}
+                        <th>Precio de compra</th>
+                        {% endif %}
+                        <th>Precio de venta</th>
+                        {% if request.user.is_staff %}
+                        <th>Opciones</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        {% if request.user.is_staff %}
+                        <th>Precio de compra</th>
+                        {% endif %}
+                        <th>Precio de venta</th>
+                        {% if request.user.is_staff %}
+                        <th>Opciones</th>
+                        {% endif %}
+                    </tr>
+                </tfoot>
+                <tbody>
+                	{% for model in models %}
+                    <tr>
+                    	<td>{{model.id}}</td>
+                    	<td>{{model.nombre}}</td>
+                    	<td>{{model.cantidad}} {{model.unidad_medida}}</td>
+                        {% if request.user.is_staff %}
+                    	<td>{{model.precio_compra}}</td>
+                        {% endif %}
+                    	<td>{{model.precio_venta}}</td>
+                        {% if request.user.is_staff %}
+                    	<td>
+                            <a href="/viewfruta/{{model.id}}"><span class="btn btn-success">Ver</span></a>
+                    		<a href="/updatefruta/{{model.id}}"><span class="btn btn-info">Editar</span></a>
+	                    	<a href="/deletefruta/{{model.id}}"><span class="btn btn-danger">Eliminar</span></a>
+                    	</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

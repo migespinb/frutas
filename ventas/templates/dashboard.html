@@ -1,0 +1,87 @@
+{% extends "main.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block title2 %} Dashboard {% endblock %}
+
+{% block content %}
+
+
+<form action="" method="GET">
+    <div class="row">
+    {% csrf_token %}
+
+        <div class="col-md-5">
+            <div class="form-group"><label class="small mb-1">Fecha de inicio</label>
+                <input class="form-control py-2" id="fecha_inicio" name="fecha_inicio" type="date" placeholder="Inicio de los tiempos" onchange="habilitar()" />
+                </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group"><label class="small mb-1">Fecha de termino</label>
+                <input class="form-control py-2" id="fecha_termino" name="fecha_termino" type="date" placeholder="Fin de los tiempos" onchange="habilitar()"/>
+                </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group mt-4 mb-0">
+                <a href="/" style="margin-top: 3px; margin-left: -5px;" class="btn btn-light btn-block">Cancelar</a>
+            </div>   
+        </div>
+        <div class="col-md-1">
+            <div class="form-group mt-4 mb-0">
+                <button type="submit" style="margin-top: 3px;" class="btn btn-primary btn-block" id="buscar" disabled="disabled">Buscar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="row" style="margin-top: 50px;">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Nº de Ventas: {{ventas.count}}</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white stretched-link" >View Details</div>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">Precio de compras: ${{costos}}</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white stretched-link" >View Details</div>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-secondary text-white mb-4">
+            <div class="card-body">Precio de ventas: ${{venta}}</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white stretched-link" >View Details</div>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">Ganancias: ${{ingresos}}</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white stretched-link" >View Details</div>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function habilitar() {
+        var fecha_inicio=$("#fecha_inicio").val();
+        var fecha_termino=$("#fecha_termino").val();
+        if (fecha_inicio && fecha_termino) {
+            $("#buscar").prop('disabled', false);
+        }else{
+            $("#buscar").prop('disabled', true);
+        }
+    }
+</script>
+{% endblock %}
