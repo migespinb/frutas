@@ -6,9 +6,9 @@ from .models import *
 
 class FrutaForm(forms.ModelForm):
 	nombre=forms.CharField(widget=forms.TextInput(attrs={"class": "form-control py-2 "}))
-	cantidad=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2 "}))
-	precio_compra=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2 "}))
-	precio_venta=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2 "}))
+	cantidad=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2 ", "min":1}))
+	precio_compra=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2 ", "min":1}))
+	precio_venta=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2 ", "min":1}))
 	unidad_medida=forms.CharField(widget=forms.TextInput(attrs={"class": "form-control py-2 "}))
 
 	class Meta:
@@ -18,8 +18,8 @@ class FrutaForm(forms.ModelForm):
 
 class VentaForm(forms.ModelForm):
 	fruta=forms.ModelChoiceField(queryset=Fruta.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class':"form-control py-2", 'onchange':"cambiar()"}))
-	cantidad=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2", 'id':"cant", 'onkeyup':"calcular_total()", 'onchange':"calcular_total()"}))
-	precio_total=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2", 'id':"total", 'readonly':"readonly"}))
+	cantidad=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2", 'id':"cant", 'onkeyup':"calcular_total()", 'onchange':"calcular_total()", "min":1}))
+	precio_total=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2", 'id':"total", 'readonly':"readonly", "min":1}))
 
 	class Meta:
 		model = Venta
@@ -28,7 +28,7 @@ class VentaForm(forms.ModelForm):
 
 class AbasteceForm(forms.ModelForm):
 	fruta=forms.ModelChoiceField(queryset=Fruta.objects.all().order_by('nombre'), widget = forms.Select(attrs = {'class':"form-control py-2"}))
-	cantidad=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2 "}))
+	cantidad=forms.IntegerField(widget=forms.NumberInput(attrs={"class": "form-control py-2 ", "min":1}))
 
 	class Meta:
 		model = Abastece
