@@ -6,6 +6,12 @@
 
 {% block content %}
 
+{% for mensaje in messages %}
+    <div class="alert alert-danger" role="alert">
+      {{mensaje}}
+    </div>
+{%  endfor %}
+
 
 <form action="" method="GET">
     <div class="row">
@@ -13,12 +19,12 @@
 
         <div class="col-md-5">
             <div class="form-group"><label class="small mb-1">Fecha de inicio</label>
-                <input class="form-control py-2" id="fecha_inicio" name="fecha_inicio" type="date" placeholder="Inicio de los tiempos" onchange="habilitar()" />
+                <input class="form-control py-2" id="fecha_inicio" value="{{request.GET.fecha_inicio}}" name="fecha_inicio" type="date" onchange="habilitar()" />
                 </div>
         </div>
         <div class="col-md-5">
             <div class="form-group"><label class="small mb-1">Fecha de termino</label>
-                <input class="form-control py-2" id="fecha_termino" name="fecha_termino" type="date" placeholder="Fin de los tiempos" onchange="habilitar()"/>
+                <input class="form-control py-2" id="fecha_termino" value="{{request.GET.fecha_termino}}" name="fecha_termino" type="date" onchange="habilitar()"/>
                 </div>
         </div>
         <div class="col-md-1">
@@ -74,6 +80,10 @@
     </div>
 </div>
 <script>
+    $(document).ready(function() {
+            habilitar();
+        }); 
+
     function habilitar() {
         var fecha_inicio=$("#fecha_inicio").val();
         var fecha_termino=$("#fecha_termino").val();

@@ -81,6 +81,9 @@ def index(request):
 		f_inicio=request.GET["fecha_inicio"]
 		f_fin=request.GET["fecha_termino"]
 
+		if f_inicio>f_fin:
+			messages.info(request, "Las fechas ingresadas son incorrectas")
+
 		ventas=Venta.objects.filter(fecha__range=(f_inicio, f_fin))
 		costos=venta=ingresos=0
 
